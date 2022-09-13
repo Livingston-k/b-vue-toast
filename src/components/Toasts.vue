@@ -14,12 +14,15 @@
         <div
           v-if="item.timeOut > 0 && item.showProgress"
           class="progress rounded-0"
-          style="height: 6px;"
+          style="height: 6px"
         >
-          <div :class="'bg-' + item.type" :style="{ width: getCurrentProgress(item) + '%' }" />
+          <div
+            :class="'bg-' + item.type"
+            :style="{ width: getCurrentProgress(item) + '%' }"
+          />
         </div>
 
-        <div class="toast-header" :class="'bg-' + item.type" style="height: 35px;">
+        <div class="toast-header" :class="'bg-' + item.type" style="height: 35px">
           <strong class="ml-auto">
             <i class="toast-icon" :class="getIconClass(item)" />
           </strong>
@@ -33,8 +36,10 @@
           >
             <span class aria-hidden="true">&times;</span>
           </button>
+          <span class="headcustom" v-if="item.type == 'danger'"> Error!!!!</span>
+          <span class="headcustom" v-if="item.type == 'success'"> Successful</span>
         </div>
-        <div class="toast-body">{{ item.message }}</div>
+        <div :class="'bodycustom toast-body bg-' + item.type">{{ item.message }}</div>
       </div>
     </TransitionGroup>
   </div>
@@ -47,29 +52,29 @@ export default {
   props: {
     showProgress: {
       type: Boolean,
-      default: true
+      default: true,
     },
     rtl: {
       type: Boolean,
-      default: false
+      default: false,
     },
     maxMessages: {
       type: Number,
-      default: 5
+      default: 5,
     },
     timeOut: {
       type: Number,
-      default: 3000
+      default: 3000,
     },
     closeable: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
       messages: [],
-      count: 0
+      count: 0,
     };
   },
   created() {
@@ -106,7 +111,7 @@ export default {
         rtl: this.rtl,
         progress: 0,
         paused: false,
-        animationFrame: null
+        animationFrame: null,
       };
 
       // merge custom options
@@ -140,7 +145,7 @@ export default {
 
       const start = () => {
         // start animation calculating
-        messageData.animationFrame = requestAnimationFrame(timestamp => {
+        messageData.animationFrame = requestAnimationFrame((timestamp) => {
           const timeElapsed = timestamp + startFrom - startTime;
 
           // check if is message object already was removed
@@ -194,10 +199,7 @@ export default {
       messageData.paused = false;
 
       // re-start animation calculating with a given start point
-      this.startTimeout(
-        messageData,
-        messageData.timeOut * messageData.progress
-      );
+      this.startTimeout(messageData, messageData.timeOut * messageData.progress);
     },
 
     /**
@@ -236,9 +238,7 @@ export default {
      * @param {number} id
      */
     remove(messageData) {
-      const index = this.messages.findIndex(
-        message => message.id === messageData.id
-      );
+      const index = this.messages.findIndex((message) => message.id === messageData.id);
 
       this.messages.splice(index, 1);
     },
@@ -249,17 +249,15 @@ export default {
      * @param {number} id
      */
     exists(messageData) {
-      const index = this.messages.findIndex(
-        message => message.id === messageData.id
-      );
+      const index = this.messages.findIndex((message) => message.id === messageData.id);
 
       if (index === -1) {
         return false;
       }
 
       return true;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -270,6 +268,7 @@ export default {
   right: 20px;
   min-width: 350px;
   z-index: 1090;
+  background-color: lightgrey;
 }
 .toast-icon {
   position: absolute;
@@ -313,5 +312,12 @@ export default {
 }
 .toast-leave-to {
   opacity: 0;
+}
+.headcustom {
+  color: #fff;
+  font-weight: bold;
+}
+.bodycustom {
+  color: #fff;
 }
 </style>

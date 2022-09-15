@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rakk7/vue-bootstrap-toasts.git"
+    "url": "git+https://github.com/Livingston-k/b-vue-toast.git"
   },
   "keywords": [
     "bootstrap",
@@ -28,9 +28,9 @@
   "author": "Rakan Salem",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rakk7/vue-bootstrap-toasts/issues"
+    "url": "https://github.com/Livingston-k/b-vue-toas/issues"
   },
-  "homepage": "https://github.com/rakk7/vue-bootstrap-toasts#readme",
+  "homepage": "https://github.com/Livingston-k/b-vue-toas#readme",
   "devDependencies": {
     "cross-env": "^5.2.0",
     "laravel-mix": "^4.1.2",
